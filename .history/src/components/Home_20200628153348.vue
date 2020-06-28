@@ -11,37 +11,33 @@
     <!-- 页面主体区域 -->
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside :width="isCollapse ? '64px' : '200px'">
-        <div class="toggle-button" @click="toggleCollapse">|||</div>
+      <el-aside width="200px">
         <!-- 侧边栏菜单区域 -->
-        <el-menu background-color="#333744" text-color="#fff" active-text-color="#409bff" unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath">
+        <el-menu background-color="#333744" text-color="#fff" active-text-color="#ffd04b">
           <!-- 一级菜单. index的作用是区分每一个菜单，并且只支持字符串-->
           <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id">
             <!-- 一级菜单模板区域 -->
             <template slot="title">
               <!-- 图标 -->
-              <i :class="iconsObj[item.id]"></i>
+              <i class="el-icon-location"></i>
               <!-- 文本 -->
               <span>{{ item.authName }}</span>
             </template>
 
-            <!-- 二级菜单 index的值换成路径用户更好理解-->
-            <el-menu-item :index="'/' + subItem.path" v-for="subItem in item.children" :key="subItem.id" @click="saveNavState('/' + subItem.path)">
+            <!-- 二级菜单 -->
+            <el-menu-item index="1-4-1">
               <template slot="title">
                 <!-- 图标 -->
-                <i class="el-icon-menu"></i>
+                <i class="el-icon-location"></i>
                 <!-- 文本 -->
-                <span>{{ subItem.authName }}</span>
+                <span>导航一</span>
               </template>
             </el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
       <!-- 右侧主体 -->
-      <el-main>
-        <!-- 路由占位符 -->
-        <router-view></router-view>
-      </el-main>
+      <el-main>Main</el-main>
     </el-container>
   </el-container>
 </template>
@@ -51,24 +47,12 @@ export default {
   data() {
     return {
       // 左侧菜单数据
-      menulist: [],
-      iconsObj: {
-        125: 'iconfont icon-user',
-        103: 'iconfont icon-tijikongjian',
-        101: 'iconfont icon-shangpin',
-        102: 'iconfont icon-danju',
-        145: 'iconfont icon-baobiao',
-      },
-      // 菜单栏是否折叠
-      isCollapse: false,
-      // 被激活的链接地址
-      activePath: ''
+      menulist: []
     }
   },
   // 在生命周期created中，请求左侧菜单列表数据
   created() {
     this.getMenuList()
-    this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
     logout() {
@@ -80,16 +64,7 @@ export default {
       const { data: res } = await this.$http.get('menus');
       if(res.meta.status !== 200) return this.$message.error(res.meta.msg);
       this.menulist = res.data;
-      // console.log(res)
-    },
-    // 点击按钮
-    toggleCollapse() {
-      this.isCollapse = !this.isCollapse
-    },
-    // 保存链接的激活状态
-    saveNavState(activePath) {
-      window.sessionStorage.setItem('activePath', activePath)
-      this.activePath = activePath
+      console.log(res)
     }
   }
 };
@@ -116,26 +91,9 @@ export default {
 
 .el-aside {
   background-color: #333744;
-  .el-menu {
-    border-right: none;
-  }
 }
 
 .el-main {
   background-color: #eaedf1;
-}
-
-.iconfont {
-  margin-right: 10px;
-}
-
-.toggle-button {
-  background-color: #4a5064;
-  font-size: 10px;
-  line-height: 24px;
-  color: #fff;
-  text-align: center;
-  letter-spacing: 0.2em;
-  cursor: pointer;
 }
 </style>

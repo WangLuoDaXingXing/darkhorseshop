@@ -10,17 +10,6 @@ import './assets/css/global.css'
 // 导入axios并挂载到Vue的原型上让每一个Vue实例都可以使用
 import axios from 'axios'
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/' // 配置请求的根路径
-
-// axios请求拦截器
-axios.interceptors.request.use(config => {
-  // console.log(config)
-
-  // 在请求头中添加一个Authorization属性，key值是token值。
-  config.headers.Authorization = window.sessionStorage.getItem("token")
-  // 在最后必须return config
-  return config
-})
-
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false

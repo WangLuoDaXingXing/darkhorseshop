@@ -68,7 +68,6 @@ export default {
   // 在生命周期created中，请求左侧菜单列表数据
   created() {
     this.getMenuList()
-    this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
     logout() {
@@ -89,7 +88,6 @@ export default {
     // 保存链接的激活状态
     saveNavState(activePath) {
       window.sessionStorage.setItem('activePath', activePath)
-      this.activePath = activePath
     }
   }
 };
