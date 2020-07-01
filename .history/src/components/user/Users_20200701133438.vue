@@ -92,13 +92,11 @@ export default {
     },
     // 监听pagesize改变的事件
     handleSizeChange(newSize) {
-      this.queryInfo.pagesize = newSize
-      this.getUserList()
+      conosle.log(newSize)
     },
     // 监听页码值改变的事件
-    handleCurrentChange(newPage) {
-      this.queryInfo.pagenum = newPage
-      this.getUserList()
+    handleCurrentChange(newPage){
+      console.log(newPage)
     }
   }
 };

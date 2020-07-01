@@ -52,9 +52,9 @@
         @current-change="handleCurrentChange"
         :current-page="queryInfo.pagenum"
         :page-sizes="[1, 2, 5, 10]"
-        :page-size="queryInfo.pagesize"
+        :page-size="queryInfo"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :total="10"
       ></el-pagination>
     </el-card>
   </div>
@@ -92,13 +92,11 @@ export default {
     },
     // 监听pagesize改变的事件
     handleSizeChange(newSize) {
-      this.queryInfo.pagesize = newSize
-      this.getUserList()
+      conosle.log(newSize)
     },
     // 监听页码值改变的事件
-    handleCurrentChange(newPage) {
-      this.queryInfo.pagenum = newPage
-      this.getUserList()
+    handleCurrentChange(newPage){
+      console.log(newPage)
     }
   }
 };

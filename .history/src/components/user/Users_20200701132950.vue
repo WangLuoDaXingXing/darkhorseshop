@@ -50,11 +50,11 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="queryInfo.pagenum"
-        :page-sizes="[1, 2, 5, 10]"
-        :page-size="queryInfo.pagesize"
+        :current-page="pagenum"
+        :page-sizes="[100, 200, 300, 400]"
+        :page-size="100"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
+        :total="400"
       ></el-pagination>
     </el-card>
   </div>
@@ -69,7 +69,6 @@ export default {
         query: "",
         // 当前页
         pagenum: 1,
-        // 当前每页显示多少条数据
         pagesize: 2
       },
       userlist: [],
@@ -92,13 +91,11 @@ export default {
     },
     // 监听pagesize改变的事件
     handleSizeChange(newSize) {
-      this.queryInfo.pagesize = newSize
-      this.getUserList()
+      conosle.log(newSize)
     },
     // 监听页码值改变的事件
-    handleCurrentChange(newPage) {
-      this.queryInfo.pagenum = newPage
-      this.getUserList()
+    handleCurrentChange(newPage){
+      console.log(newPage)
     }
   }
 };

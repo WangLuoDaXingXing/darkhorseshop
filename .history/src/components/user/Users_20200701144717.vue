@@ -97,8 +97,7 @@ export default {
     },
     // 监听页码值改变的事件
     handleCurrentChange(newPage) {
-      this.queryInfo.pagenum = newPage
-      this.getUserList()
+      console.log(newPage)
     }
   }
 };
