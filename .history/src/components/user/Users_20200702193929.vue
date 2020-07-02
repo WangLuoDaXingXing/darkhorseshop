@@ -302,18 +302,7 @@ export default {
           return err
         })
 
-        // 如果用户据确认删除，则返回值为字符串 confirm，取消则为 cancel
-        if(confirmResult !== 'confirm') {
-          return this.$message.info('已取消删除')
-        }
-
-        const {data: res} = await this.$http.delete('users/' + id)
-        if(res.meta.status !== 200) {
-          return this.$message.error('删除用户失败！')
-        }
-
-        this.$message.success('删除用户成功！')
-        this.getUserList()
+        console.log(confirmResult)
     }
   }
 };
