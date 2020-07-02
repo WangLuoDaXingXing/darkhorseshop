@@ -59,7 +59,7 @@
     </el-card>
 
     <!-- 添加用户的对话框 -->
-    <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed">
+    <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="50%">
       <!-- 内容主体区域表单 -->
       <el-form
         :model="addForm"
@@ -83,7 +83,7 @@
       <!-- 底部区域 -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addUser">确 定</el-button>
+        <el-button type="primary" @click="addDialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -189,15 +189,6 @@ export default {
         return this.$message.error("更新用户状态失败！");
       }
       this.$message.success("更新用户状态成功！");
-    },
-    // 监听添加用户对话框的关闭事件
-    addDialogClosed() {
-      this.$refs.addFormRef.resetFields()
-    },
-    addUser() {
-      this.$refs.addFormRef.validate(valid => {
-        console.log(valid)
-      })
     }
   }
 };

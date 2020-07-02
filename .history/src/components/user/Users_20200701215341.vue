@@ -59,7 +59,7 @@
     </el-card>
 
     <!-- 添加用户的对话框 -->
-    <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed">
+    <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="50%">
       <!-- 内容主体区域表单 -->
       <el-form
         :model="addForm"
@@ -83,7 +83,7 @@
       <!-- 底部区域 -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addUser">确 定</el-button>
+        <el-button type="primary" @click="addDialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -92,7 +92,7 @@
 <script>
 export default {
   data() {
-    // 定义验证邮箱的规则
+    // 验证邮箱的规则
     var checkEmail = (rule, value, cb) => {
       // 验证邮箱的正则表达式
       const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
@@ -100,19 +100,20 @@ export default {
         // 合法的邮箱
         return cb()
       }
+
       cb(new Error('请输入合法的邮箱'))
     }
 
-    // 定义验证手机号的规则
+    // 验证手机号的规则
     var checkMobile = (rule, value, cb) => {
       // 验证手机号的正则表达式
       const regMobile = /^(0|86|17591)?(13[0-9]|15[0123456789]|17[678]|18[0-9]|14[57])[0-9]{8}$/
       if(regMobile.test(value)) {
         return cb()
       }
+
       cb(new Error('请输入合法的手机号'))
     }
-    
     return {
       // 获取用户列表参数对应的数据
       queryInfo: {
@@ -148,8 +149,7 @@ export default {
           { validator: checkEmail, trigger: 'blur' }
         ],
         mobile: [
-          { required: true, message: '请输入手机号', trigger: 'blur' },
-          { validator: checkMobile, trigger: 'blur' }
+          { required: true, message: '请输入手机号', trigger: 'blur' }
         ]
       } 
     };
@@ -189,15 +189,6 @@ export default {
         return this.$message.error("更新用户状态失败！");
       }
       this.$message.success("更新用户状态成功！");
-    },
-    // 监听添加用户对话框的关闭事件
-    addDialogClosed() {
-      this.$refs.addFormRef.resetFields()
-    },
-    addUser() {
-      this.$refs.addFormRef.validate(valid => {
-        console.log(valid)
-      })
     }
   }
 };
