@@ -23,10 +23,7 @@ import {
     Pagination,
     Dialog,
     MessageBox,
-    Tag,
-    Tree,
-    Select,
-    Option
+    Tag
  } from 'element-ui'
 
 
@@ -53,8 +50,5 @@ Vue.use(Tooltip)
 Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(Tag)
-Vue.use(Tree)
-Vue.use(Select)
-Vue.use(Option)
 Vue.prototype.$message = Message // 挂载到Vue实例的prototype上，实现全局挂载
 Vue.prototype.$confirm = MessageBox.confirm 
